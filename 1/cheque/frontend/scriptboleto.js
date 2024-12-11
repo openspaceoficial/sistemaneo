@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             try {
                 // Envia os dados para o backend
-                const response = await fetch('http://localhost:5002/api/boletos/cadastroboleto', {
+                const response = await fetch('https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app/api/boletos/cadastroboleto', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Função para buscar boletos próximos ao vencimento
 function buscarBoletosProximos() {
-    fetch('http://localhost:5002/api/boletos/proximos-boletos')
+    fetch('https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app/api/boletos/proximos-boletos')
         .then(response => response.json())
         .then(data => {
             const proximoBoletoDiv = document.getElementById("proximoBoleto");
@@ -100,7 +100,7 @@ function formatarData(dataISO) {
 // Função para marcar boleto como pago
 function marcarComoPago(id) {
     console.log('ID do boleto:', id); // Verifique se o ID está correto
-    fetch(`http://localhost:5002/api/boletos/pagar/${id}`, {
+    fetch(`https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app/api/boletos/pagar/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ function marcarComoPago(id) {
 // Função para consultar boletos por vencimento e exibir em tabela
 function consultarBoletos() {
     const dataVencimento = document.getElementById('consultaData').value;
-    fetch(`http://localhost:5002/api/boletos/consultar-boleto-por-vencimento?dataVencimento=${dataVencimento}`)
+    fetch(`https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app/api/boletos/buscar-por-vencimento?dataVencimento=${dataVencimento}`)
         .then(response => response.json())
         .then(data => {
             const resultadosDiv = document.getElementById("resultados");

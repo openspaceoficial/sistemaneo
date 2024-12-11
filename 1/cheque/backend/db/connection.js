@@ -1,19 +1,16 @@
 const mysql = require('mysql2');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root', // Usuário MySQL
-    password: 'Toby@2020', // Ou sua senha 
-    database: 'sistema_cheques', // Nome do banco
-    port: 3306 // Porta configurada no MySQL/XAMPP
+const pool = mysql.createPool({
+    host: '127.0.0.1', // ou o IP correto
+    user: 'root',
+    password: '',
+    database: 'sistema_cheques',
+    port: 3306,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
+    connectTimeout: 10000 // 10 segundos
 });
 
-connection.connect((err) => {
-    if (err) {
-        console.error('Erro ao conectar ao banco de dados:', err);
-    } else {
-        console.log('Conexão com o banco de dados bem-sucedida!');
-    }
-});
 
-module.exports = connection;
+module.exports = pool.promise(); // Exporta com suporte a Promises

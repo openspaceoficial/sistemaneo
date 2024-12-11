@@ -15,25 +15,27 @@ document.addEventListener('DOMContentLoaded', function () {
     if (relatorioForm) {
         relatorioForm.addEventListener('submit', async function (event) {
             event.preventDefault();
-
+        
             const dataInicio = document.getElementById('data_inicio').value;
             const dataFim = document.getElementById('data_fim').value;
-
+        
             if (!dataInicio || !dataFim) {
                 alert('Por favor, preencha as datas de início e fim.');
                 return;
             }
-
+        
             try {
                 // Exibir spinner e ocultar mensagens anteriores
                 loadingSpinner.style.display = 'block';
                 resultadosDiv.innerHTML = '';
                 errorMessage.style.display = 'none';
-
-                const response = await fetch(`http://localhost:5002/api/cheques/relatorio?dataInicio=${dataInicio}&dataFim=${dataFim}`);
-                const cheques = await response.json();
-
-                if (response.ok && cheques.length > 0) {
+        
+                const response = await fetch(`https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app/api/cheques/relatorio?dataInicio=${dataInicio}&dataFim=${dataFim}`);
+        
+                // Aqui, só chamamos response.json() uma vez
+                const data = await response.json();  // Obtendo o JSON da resposta
+        
+                if (response.ok && data.cheques && data.cheques.length > 0) {
                     let tabelaHTML = `
                         <h3>Relatório de Cheques</h3>
                         <table>
@@ -46,8 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <th>Status</th>
                             </tr>
                     `;
-
-                    cheques.forEach(cheque => {
+        
+                    data.cheques.forEach(cheque => {
                         tabelaHTML += `
                             <tr>
                                 <td>${cheque.cheque_numero}</td>
@@ -59,10 +61,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             </tr>
                         `;
                     });
-
+        
                     tabelaHTML += '</table>';
                     resultadosDiv.innerHTML = tabelaHTML;
-
+        
                 } else {
                     resultadosDiv.innerHTML = '<p>Nenhum cheque encontrado para o período selecionado.</p>';
                 }
@@ -72,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } finally {
                 loadingSpinner.style.display = 'none';
             }
-        });
+        });        
     } else {
         console.warn("Formulário de relatório não encontrado.");
     }

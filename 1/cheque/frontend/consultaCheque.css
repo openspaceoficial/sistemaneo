@@ -1,0 +1,203 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #e0f7fa;
+    color: #212121; /* Texto em preto mais forte */
+    padding: 20px;
+}
+.header-container {
+    background-color: #67c0ce;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-container h1 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.header-container ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.header-container a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    transition: color 0.3s;
+}
+
+.header-container a:hover {
+    color: #cce7ff;
+}
+
+.logo {
+    width: 6%;
+    height: 100px;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    background-color: white;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #08A5BC;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+label {
+    font-size: 1em;
+    color: #212121; /* Texto em preto mais forte */
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="date"],
+select,
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #90caf9;
+    background-color: #ffffff;
+    color: #333;
+    font-size: 1em;
+}
+
+
+button {
+    background-color: #08A5BC;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.9s;
+}
+
+button:hover {
+    background-color: #01579b;
+}
+
+
+.tabela {
+    width: 100%; /* A tabela ocupa toda a largura do container */
+    border-collapse: collapse; /* Remove espaços entre as bordas */
+    margin: 0 auto; /* Centraliza a tabela */
+    table-layout: fixed; /* Garante que as colunas tenham tamanho fixo */
+}
+
+.tabela th,
+.tabela td {
+    border: 1px solid #ddd; /* Define bordas finas */
+    padding: 10px; /* Adiciona espaço interno nas células */
+    text-align: left; /* Alinha o texto à esquerda */
+    white-space: normal; /* Permite quebra de linha automática */
+    word-wrap: break-word; /* Quebra palavras longas automaticamente */
+}
+
+.tabela th {
+    background-color: rgb(242, 242, 242);
+    color: black; /* Cor do texto do cabeçalho */
+}
+
+.tabela td {
+    vertical-align: top; /* Garante alinhamento consistente */
+}
+
+/* Ajusta o container para acomodar a tabela */
+#resultados {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffffff; /* Fundo branco */
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    overflow: hidden; /* Remove qualquer scroll desnecessário */
+}
+
+#resultados.empty {
+    background-color: #ffe0e0;
+    color: #08A5BC;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    background-color: #67c0ce;
+    color: #ffffff;
+    height: 50px;
+    font-size: 0.9em;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Modal de Edição */
+#form-edicao {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 9999; /* Garante que o modal fique sobre outros elementos */
+}
+
+/* Fundo do modal (escurece o fundo para dar foco ao modal) */
+#modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998; /* Fica abaixo do modal, mas acima do conteúdo */
+}
+
+/* Estilo dos botões do modal */
+#form-edicao button {
+    margin-top: 10px;
+}
+
+/* Estilo de esconder o formulário de edição */
+#form-edicao button[type="button"] {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#form-edicao button[type="button"]:hover {
+    background-color: #d32f2f;
+}
+
+input {
+    width: 100%;
+    height: 3vh;
+}

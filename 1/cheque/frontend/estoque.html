@@ -17,13 +17,12 @@
             <h1>SISTEMA NEO</h1>
             <img src="logoneo.png" alt="Logo da Empresa" class="logo">
             <ul>
-                <li><a href="cadastro.html">Cadastro de Cheque</a></li>
+                <li><a href="pag.html">Inicio</a></li>
+                <li><a href="cadastro.html">Cadastro Cheques</a></li>
                 <li><a href="relatorio.html">Relatório de Cheques</a></li>
-                <li><a href="estoque.html">Estoque</a></li>
-                <li><a href="consulta.html">Consulta</a></li>
-                <li><a href="consultaBoleto.html">Consulta Boletos</a></li>
+                <li><a href="consulta.html">Consulta Cheque</a></li>
                 <li><a href="boleto.html">Boleto</a></li>
-
+                <li><a href="consultaBoleto.html">Consulta Boleto</a></li>
             </ul>
         </nav>
     </header>
@@ -116,7 +115,7 @@
 
         // Função para buscar e exibir produtos no estoque
         function carregarProdutos() {
-            fetch('http://localhost:5002/api/produtos')
+            fetch('https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app /api/produtos')
                 .then(response => response.json())
                 .then(data => {
                     exibirProdutos(data);
@@ -132,7 +131,7 @@
                 return;
             }
 
-            fetch(`http://localhost:5002/api/produtos/${searchValue}`)
+            fetch(`https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app /api/produtos/${searchValue}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("Produto não encontrado");
@@ -166,7 +165,7 @@
 
             try {
                 // Envia os dados para o backend
-                const response = await fetch('http://localhost:5002/api/produtos', {
+                const response = await fetch('https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app /api/produtos', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -196,7 +195,7 @@
         // Função para excluir um produto do estoque
         function excluirProduto(id) {
             if (confirm("Tem certeza que deseja excluir este produto?")) {
-                fetch(`http://localhost:5002/api/produtos/${id}`, {
+                fetch(`https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app /api/produtos/${id}`, {
                     method: 'DELETE'
                 })
                 .then(response => {

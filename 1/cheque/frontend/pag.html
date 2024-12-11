@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="cadastro.css"> <!-- CSS comum -->
 
 </head>
-<body>
+<body id="page-Inicial">
     <header>
         <nav class="header-container">
             <h1>SISTEMA NEO</h1>
             <img src="logoneo.png" alt="Logo da Empresa" class="logo">
             <ul>
-                <li><a href="cadastro.html">Cadastro de Cheque</a></li>
+                <li><a href="pag.html">Inicio</a></li>
+                <li><a href="cadastro.html">Cadastro Cheques</a></li>
                 <li><a href="relatorio.html">Relatório de Cheques</a></li>
-                <li><a href="estoque.html">Estoque</a></li>
-                <li><a href="consulta.html">Consulta</a></li>
-                
+                <li><a href="consulta.html">Consulta Cheque</a></li>
                 <li><a href="boleto.html">Boleto</a></li>
+                <li><a href="consultaBoleto.html">Consulta Boleto</a></li>
             </ul>
         </nav>
     </header>
@@ -36,12 +36,12 @@
 </div> 
 
 <!-- Próximos Cheques a Vencer -->
-<!-- Próximos Cheques à Vencer -->
-<div id="proximosChequesContainer" class="container">
-    <h2>Próximos Cheques à Vencer</h2>
-    <div id="chequesLista"></div> <!-- Container para os cheques -->
+<div id="proximoChequePag" class="container">
+    <h2>Próximos Cheques à Vencer</h2> <!-- Título fora da função -->
+    <!-- Aqui os cheques serão carregados dinamicamente -->
+    <div id="proximoChequePag"></div>
 </div>
-
+ 
 
 
     <!-- Rodapé -->

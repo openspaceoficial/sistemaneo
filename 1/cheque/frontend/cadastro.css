@@ -245,15 +245,21 @@ footer p {
 }
 
 .clinica {
-    background-color: red;
-    color: white;
+    border: solid;
+    border-color: #ff7b6a;
+    color: black;
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
 }
 
+span {
+    color: red;
+}
+
 .escola {
-    background-color: yellow;
+    border: solid;
+    border-color:rgb(3, 201, 46) ;
     color: black;
     padding: 10px;
     margin: 5px 0;

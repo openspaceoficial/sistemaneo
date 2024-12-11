@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
 
-
 // Rota para consultar cheques que vencem no dia seguinte
 router.get('/proximos', (req, res) => {
     const query = `
@@ -18,7 +17,6 @@ router.get('/proximos', (req, res) => {
     });
 });
 
-
 router.post('/cadastrocheque', (req, res) => {
     const { cheque_numero, data_emissao, nome_beneficiario, valor, data_vencimento, descricao } = req.body;
 
@@ -33,23 +31,25 @@ router.post('/cadastrocheque', (req, res) => {
     });
 });
 
-//Consultar
-// Rota para consultar cheques
-router.get('/cheques', (req, res) => {
-    const status = req.query.status; // Filtra pelo status se fornecido
-    let sql = 'SELECT id, cheque_numero, nome_beneficiario, valor, data_emissao, data_vencimento, status, descricao FROM cheques';
+// Rota para listar cheques com ou sem filtro
+router.get('/api/cheques', (req, res) => {
+    const status = req.query.status; // Obtém o valor do filtro "status"
+    let sql = 'SELECT * FROM cheques'; // Consulta base
+    const params = [];
 
-    // Adiciona a condição para o status, se fornecido
+    // Adiciona filtro de status, se necessário
     if (status && status !== 'todos') {
-        sql += ` WHERE status = ?`;
+        sql += ' WHERE status = ?';
+        params.push(status);
     }
 
-    db.query(sql, [status], (err, results) => {
+    db.query(sql, params, (err, results) => {
         if (err) {
             console.error('Erro ao buscar cheques:', err);
-            return res.status(500).json({ error: 'Erro ao buscar cheques' });
+            return res.status(500).json({ error: 'Erro ao buscar cheques.' });
         }
-        res.json(results); // Inclui o campo "id" nos resultados
+
+        res.json(results); // Retorna os cheques encontrados
     });
 });
 
@@ -73,26 +73,6 @@ router.delete('/cheques/:id', (req, res) => {
         res.status(200).json({ message: 'Cheque excluído com sucesso!' });
     });
 });
-
-// Rota para editar um cheque
-router.put('/cheques/:id', (req, res) => {
-    const id = req.params.id;
-    const { cheque_numero, nome_beneficiario, valor, status, data_emissao, data_vencimento, descricao } = req.body;
-
-    const query = `
-        UPDATE cheques
-        SET cheque_numero = ?, nome_beneficiario = ?, valor = ?, status = ?, data_emissao = ?, data_vencimento = ?, descricao = ?
-        WHERE id = ?
-    `;
-    db.query(query, [cheque_numero, nome_beneficiario, valor, status, data_emissao, data_vencimento, descricao, id], (err, result) => {
-        if (err) {
-            console.error('Erro ao atualizar cheque:', err);
-            return res.status(500).json({ error: 'Erro ao atualizar cheque' });
-        }
-        res.status(200).json({ message: 'Cheque atualizado com sucesso!' });
-    });
-});
-
 
 // Exemplo de código para atualizar o status de um cheque para "compensado"
 router.put('/compensar/:id', (req, res) => {
@@ -118,8 +98,6 @@ router.put('/compensar/:id', (req, res) => {
     });
 });
 
-
-
 router.patch('/compensar/:id', (req, res) => {
     const chequeId = req.params.id;
 
@@ -138,6 +116,31 @@ router.patch('/compensar/:id', (req, res) => {
             res.json({ success: true, message: 'Cheque marcado como compensado' });
         } else {
             res.status(404).json({ success: false, message: 'Cheque não encontrado' });
+        }
+    });
+});
+// Rota para editar cheque
+router.put('/cheques/:id', (req, res) => {
+    const chequeId = req.params.id;
+    const { cheque_numero, nome_beneficiario, valor, status, data_emissao, data_vencimento, descricao, empresa } = req.body;
+
+    // Query para atualizar os dados do cheque
+    const query = `
+        UPDATE cheques
+        SET cheque_numero = ?, nome_beneficiario = ?, valor = ?, status = ?, data_emissao = ?, data_vencimento = ?, descricao = ?, empresa = ?
+        WHERE id = ?
+    `;
+
+    db.query(query, [cheque_numero, nome_beneficiario, valor, status, data_emissao, data_vencimento, descricao, empresa, chequeId], (err, result) => {
+        if (err) {
+            console.error('Erro ao atualizar cheque:', err);
+            return res.status(500).json({ error: 'Erro ao atualizar cheque' });
+        }
+
+        if (result.affectedRows > 0) {
+            res.status(200).json({ message: 'Cheque atualizado com sucesso!' });
+        } else {
+            res.status(404).json({ error: 'Cheque não encontrado' });
         }
     });
 });

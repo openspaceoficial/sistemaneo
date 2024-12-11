@@ -44,7 +44,7 @@ function initCadastroCheque() {
             };
 
             try {
-                const response = await fetch('http://localhost:5002/api/cheques/cadastrocheque', {
+                const response = await fetch('https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app/api/cheques/cadastrocheque', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(chequeData),
@@ -91,7 +91,7 @@ function initRelatorio() {
                 loadingSpinner.style.display = 'block';
                 resultadosDiv.innerHTML = '';
 
-                const response = await fetch(`http://localhost:5002/api/cheques/relatorio?dataInicio=${dataInicio}&dataFim=${dataFim}`);
+                const response = await fetch(`https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app/api/cheques/relatorio?dataInicio=${dataInicio}&dataFim=${dataFim}`);
                 const cheques = await response.json();
 
                 if (response.ok && cheques.length > 0) {
@@ -144,7 +144,7 @@ function initRelatorio() {
 // Carrega os próximos cheques a vencer
 async function carregarProximosCheques() {
     try {
-        const response = await fetch('http://localhost:5002/api/cheques/proximos');
+        const response = await fetch('https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app/api/cheques/proximos');
         const cheques = await response.json();
 
         const proximoChequeDiv = document.getElementById('proximoCheque');
@@ -170,7 +170,7 @@ async function carregarProximosCheques() {
                 proximoChequeDiv.innerHTML += `
                     <div class="${classeEmpresa}" id="cheque-${cheque.cheque_numero}">
                         <p>Cheque nº: ${cheque.cheque_numero}</p>
-                        <p>Empresa Emitente: ${cheque.empresa}</p>
+                        <p>Empresa Emitente: <span> ${cheque.empresa} </span></p>
                         <p>Beneficiário: ${cheque.nome_beneficiario}</p>
                         <p>Data de Vencimento: ${formatarData(cheque.data_vencimento)}</p>
                         <p>Valor: R$ ${parseFloat(cheque.valor).toFixed(2).replace('.', ',')}</p>
@@ -198,7 +198,7 @@ async function marcarComoCompensado(chequeNumero) {
 // Função para atualizar o status de um cheque no servidor
 async function atualizarStatusCheque(chequeNumero, status) {
     try {
-        const response = await fetch(`http://localhost:5002/api/cheques/atualizar-status/${chequeNumero}`, {
+        const response = await fetch(`https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app/api/cheques/atualizar-status/${chequeNumero}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status })
@@ -238,7 +238,7 @@ function consultarCheques() {
     }
 
     // Fazendo a requisição para a API que consulta cheques por data de vencimento
-    fetch(`http://localhost:5002/api/cheques/buscar-por-vencimento?dataVencimento=${dataVencimento}`)
+    fetch(`https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app/api/cheques/buscar-por-vencimento?dataVencimento=${dataVencimento}`)
         .then(response => response.json())
         .then(data => {
             console.log('Cheques encontrados:', data);
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function marcarComoCompensado(chequeNumero) {
     try {
         // Fazendo a requisição PATCH para a API
-        const response = await fetch(`http://localhost:5002/api/cheques/compensar/${chequeNumero}`, {
+        const response = await fetch(`https://94dd-2804-53e0-823a-4000-2938-ec4b-7476-8e95.ngrok-free.app/api/cheques/compensar/${chequeNumero}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
